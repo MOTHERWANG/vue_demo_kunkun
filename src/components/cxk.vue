@@ -1,19 +1,19 @@
 <template>
   <div :style="transStyle">
-    <div id="tag">{{ index }}</div>
-    <img src="../assets/cxk.jpeg" />
+    <div id='tag'>{{ index }}</div>
+    <img src='../assets/cxk.jpeg' />
   </div>
 </template>
 
 <script>
 export default {
-  name: "cxk",
+  name: 'cxk',
   props: {
     initAngle: Number,
     borderWidth: Number,
     borderHeight: Number,
     initSpeed: Number,
-    index: Number,
+    index: Number
   },
   data: function () {
     return {
@@ -22,76 +22,76 @@ export default {
       angle: this.initAngle,
       width: 100,
       height: 100,
-      speed: this.initSpeed ? this.initSpeed : 1,
-    };
+      speed: this.initSpeed ? this.initSpeed : 1
+    }
   },
   computed: {
     transStyle: function () {
-      return `transform: translate(${this.x_pos}px,${this.y_pos}px);`;
-    },
+      return `transform: translate(${this.x_pos}px,${this.y_pos}px);`
+    }
   },
   methods: {
     getNextAngle: function (borderName, angle) {
       if (angle > 360) {
-        angle %= 360;
+        angle %= 360
       }
       switch (borderName) {
-        case "top":
-          return 360 - angle;
-        case "right":
-          return 540 - angle;
-        case "bottom":
-          return 360 - angle;
-        case "left":
-          return 180 - angle;
+        case 'top':
+          return 360 - angle
+        case 'right':
+          return 540 - angle
+        case 'bottom':
+          return 360 - angle
+        case 'left':
+          return 180 - angle
         default:
-          break;
+          break
       }
     },
     getIfArriveBorder: function () {
       if (this.x_pos <= 0) {
-        this.x_pos = 0;
-        return "left";
+        this.x_pos = 0
+        return 'left'
       }
       if (this.y_pos <= 0) {
-        this.y_pos = 0;
-        return "top";
+        this.y_pos = 0
+        return 'top'
       }
       if (this.x_pos + this.width >= this.borderWidth) {
-        this.x_pos = this.borderWidth - this.width;
-        return "right";
+        this.x_pos = this.borderWidth - this.width
+        return 'right'
       }
       if (this.y_pos + this.height >= this.borderHeight) {
         //   alert(`${this.y_pos},${this.height},${this.borderHeight},angle:${this.angle}`)
-        this.y_pos = this.borderHeight - this.height;
-        return "bottom";
+        this.y_pos = this.borderHeight - this.height
+        return 'bottom'
       } else {
-        return false;
+        return false
       }
     },
     getNextPos: function () {
-      let border = this.getIfArriveBorder();
+      let border = this.getIfArriveBorder()
       if (border) {
-        this.angle = this.getNextAngle(border, this.angle);
-        this.x_pos += this.speed * Math.cos((this.angle / 180) * Math.PI);
-        this.y_pos += this.speed * Math.sin((this.angle / 180) * Math.PI);
+        this.angle = this.getNextAngle(border, this.angle)
+        this.x_pos += this.speed * Math.cos((this.angle / 180) * Math.PI)
+        this.y_pos += this.speed * Math.sin((this.angle / 180) * Math.PI)
       } else {
-        this.x_pos += this.speed * Math.cos((this.angle / 180) * Math.PI);
-        this.y_pos += this.speed * Math.sin((this.angle / 180) * Math.PI);
+        this.x_pos += this.speed * Math.cos((this.angle / 180) * Math.PI)
+        this.y_pos += this.speed * Math.sin((this.angle / 180) * Math.PI)
       }
     },
     updatePos: function () {
-      this.getNextPos();
-      console.log(this.angle);
+      this.getNextPos()
+      console.log(this.angle)
       setTimeout(() => {
-        this.updatePos();
-      }, 20);
-    },
+        this.updatePos()
+      }, 5)
+    }
   },
-  created() {
-    this.updatePos();
-  },
-};
+  created () {
+    this.updatePos()
+  }
+}
 </script>
 
 <style scoped>
