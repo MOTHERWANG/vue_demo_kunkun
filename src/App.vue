@@ -5,6 +5,7 @@
     <!-- <Cxk :initAngle="angle1" :index=3 :initSpeed="2.998" :borderWidth="borderWidth" :borderHeight="borderHeight" /> -->
     <!-- <Cxk :initAngle="angle1" :index=2 :initSpeed="2.999" :borderWidth="borderWidth" :borderHeight="borderHeight" /> -->
     <Cxk :initAngle="angle1" :index=1 :initSpeed="2.0"   :borderWidth="borderWidth" :borderHeight="borderHeight" />
+    <Racket/>
   </div>
 </template>
 
@@ -12,11 +13,14 @@
 // import func from 'vue-editor-bridge';
 // import Vue from 'vue'
 import Cxk from './components/cxk'
+import Racket from './components/racket'
+// import Racket from './components/racket.vue'
 
 export default {
   name: 'App',
   components: {
-    Cxk
+    Cxk,
+    Racket
   },
   data: function () {
     return {
