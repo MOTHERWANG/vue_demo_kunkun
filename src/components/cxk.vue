@@ -1,5 +1,5 @@
 <template>
-  <div :style="transStyle">
+  <div :style="transStyle" v-on:click="this.clickHandler">
     <div id='tag'>{{ index }}</div>
     <img src='../assets/cxk.jpeg' />
   </div>
@@ -9,7 +9,10 @@
 export default {
   name: 'cxk',
   props: {
-    initAngle: Number,
+    initAngle: {
+        type: Number,
+        required: true
+    },
     borderWidth: Number,
     borderHeight: Number,
     initSpeed: Number,
@@ -73,12 +76,9 @@ export default {
       let border = this.getIfArriveBorder()
       if (border) {
         this.angle = this.getNextAngle(border, this.angle)
-        this.x_pos += this.speed * Math.cos((this.angle / 180) * Math.PI)
-        this.y_pos += this.speed * Math.sin((this.angle / 180) * Math.PI)
-      } else {
-        this.x_pos += this.speed * Math.cos((this.angle / 180) * Math.PI)
-        this.y_pos += this.speed * Math.sin((this.angle / 180) * Math.PI)
       }
+      this.x_pos += this.speed * Math.cos((this.angle / 180) * Math.PI)
+      this.y_pos += this.speed * Math.sin((this.angle / 180) * Math.PI)
     },
     updatePos: function () {
       this.getNextPos()
@@ -86,6 +86,9 @@ export default {
       setTimeout(() => {
         this.updatePos()
       }, 5)
+    },
+    clickHandler: function() {
+      alert('cxk')
     }
   },
   created () {
